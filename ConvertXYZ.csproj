@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Authors>Jingshan S. Du</Authors>
+    <Company />
+    <Copyright>(C) 2021 Jingshan S. Du</Copyright>
+    <Description>Converts standard XYZ files to computem XYZ files.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.8.0" />
+    <PackageReference Include="Periodica.Data" Version="0.1.0" />
+  </ItemGroup>
+
+</Project>
