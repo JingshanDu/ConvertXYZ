@@ -42,7 +42,7 @@ CommandLine: https://github.com/commandlineparser/commandline
 
 Bluegrams.Periodica.Data: https://github.com/Bluegrams/periodic-table-data
 
-## Download the Programs
+## Program Download
 Please visit https://github.com/SequoiaDu/ConvertXYZ/releases
 
 Availablity: Windows (win-x86), Linux (linux-x64), and macOS (osx-x64)
