@@ -1,0 +1,2 @@
+D:\Sources\ConvertXYZ\bin\Release\netcoreapp3.1\publish\ConvertXYZ.pdb
+D:\Sources\ConvertXYZ\bin\Release\netcoreapp3.1\publish\ConvertXYZ

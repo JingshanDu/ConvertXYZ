@@ -6,7 +6,9 @@
     <Authors>Jingshan S. Du</Authors>
     <Company />
     <Copyright>(C) 2021 Jingshan S. Du</Copyright>
-    <Description>Converts standard XYZ files to computem XYZ files.</Description>
+    <Description>Converts standard XYZ files to computem XYZ files, or vice versa.</Description>
+    <PackageProjectUrl>https://github.com/SequoiaDu/ConvertXYZ</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/SequoiaDu/ConvertXYZ</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
