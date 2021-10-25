@@ -232,7 +232,6 @@ D:\Sources\ConvertXYZ\obj\Release\netcoreapp3.1\win-x86\ConvertXYZ.GeneratedMSBu
 D:\Sources\ConvertXYZ\obj\Release\netcoreapp3.1\win-x86\ConvertXYZ.AssemblyInfoInputs.cache
 D:\Sources\ConvertXYZ\obj\Release\netcoreapp3.1\win-x86\ConvertXYZ.AssemblyInfo.cs
 D:\Sources\ConvertXYZ\obj\Release\netcoreapp3.1\win-x86\ConvertXYZ.csproj.CoreCompileInputs.cache
-D:\Sources\ConvertXYZ\obj\Release\netcoreapp3.1\win-x86\ConvertXYZ.csproj.CopyComplete
 D:\Sources\ConvertXYZ\obj\Release\netcoreapp3.1\win-x86\ConvertXYZ.dll
 D:\Sources\ConvertXYZ\obj\Release\netcoreapp3.1\win-x86\ConvertXYZ.pdb
 D:\Sources\ConvertXYZ\obj\Release\netcoreapp3.1\win-x86\ConvertXYZ.genruntimeconfig.cache

@@ -11,6 +11,7 @@ namespace ConvertXYZ
         public class Options
         {
             [Value(0, 
+                Required = true,
                 HelpText ="Input one or more xyz file(s).")]
             public IEnumerable<string> InputFiles { get; set; }
 

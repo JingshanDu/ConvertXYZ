@@ -1,8 +1,7 @@
 {
   "profiles": {
     "ConvertXYZ": {
-      "commandName": "Project",
-      "commandLineArgs": "\"D:\\Work Folder\\calc\\qstem\\Au-Ni SL\\Au2c_on_Ni_cis-computem.xyz\" -r"
+      "commandName": "Project"
     }
   }
 }
