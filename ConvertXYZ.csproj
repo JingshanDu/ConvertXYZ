@@ -9,6 +9,7 @@
     <Description>Converts standard XYZ files to computem XYZ files, or vice versa.</Description>
     <PackageProjectUrl>https://github.com/SequoiaDu/ConvertXYZ</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SequoiaDu/ConvertXYZ</RepositoryUrl>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
