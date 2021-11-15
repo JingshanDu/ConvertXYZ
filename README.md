@@ -68,4 +68,4 @@ Please visit https://github.com/JingshanDu/ConvertXYZ/releases
 
 Availablity: Windows (win-x86), Linux (linux-x64), and macOS (osx-x64)
 
-Tested on Windows only but should work in all other environments. Programs are self-contained and have required dependencies included in the single executable file.
+Tested in both Windows and Ubuntu. Programs are self-contained and have required dependencies included in the single executable file.
