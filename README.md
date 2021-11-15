@@ -24,12 +24,15 @@ Options:
                    placed in the same folder(s) as the input file(s).
 
   -v, --verbose    (Default: false) Turn on the verbose mode to print every line of the processed XYZ record to the
-                   screen. Default behavior: false.
+                   screen. May significantly slow down the conversion. Use only for debugging. Default behavior: false.
 
   -t, --thermal    (Default: 0.08) Specify the RMS thermal vibration coefficient in Angstroms (generally, 0.05-0.1).
-                   Default behavior; 0.08. Only used in forward processing.
+                   Default behavior: 0.08. Only used in forward processing.
 
-  --help           Display a help screen.
+  -c, --cell       (Default: ) Specify the unit cell size separated by commas: x,y,z. Only effective in forward
+                   conversion. Default behavior: Using the maximum xyz coordinates of the atoms.
+
+  --help           Display this help screen.
 
   --version        Display version information.
 ```

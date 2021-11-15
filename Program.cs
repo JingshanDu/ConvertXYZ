@@ -30,15 +30,21 @@ namespace ConvertXYZ
             [Option('v', "verbose",
                 Required = false,
                 Default = false,
-                HelpText = "Turn on the verbose mode to print every line of the processed XYZ record to the screen. Default behavior: false.")]
+                HelpText = "Turn on the verbose mode to print every line of the processed XYZ record to the screen. May significantly slow down the conversion. Use only for debugging. Default behavior: false.")]
             public Boolean IsVerbose { get; set; }
 
             [Option('t', "thermal",
                 Required = false,
                 Default = (Single)0.08, 
-                HelpText = "Specify the RMS thermal vibration coefficient in Angstroms (generally, 0.05-0.1). Default behavior; 0.08. Only used in forward processing.")]
+                HelpText = "Specify the RMS thermal vibration coefficient in Angstroms (generally, 0.05-0.1). Default behavior: 0.08. Only used in forward processing.")]
             // Default RMS thermal vibration taken from https://prism-em.com/tutorial-classic/#step3
             public Single ThermalVibration { get; set; }
+
+            [Option('c', "cell",
+                Required = false,
+                Default = "",
+                HelpText = "Specify the unit cell size separated by commas: x,y,z. Only effective in forward conversion. Default behavior: Using the maximum xyz coordinates of the atoms.")]
+            public string CellSize { get; set; }
         }
 
 
@@ -68,13 +74,13 @@ namespace ConvertXYZ
                         strExplainMode = "computem to standard xyz.";
                     }
                     string strVersionNum = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
-                    Console.WriteLine("ConvertXYZ " + strVersionNum + " operating in the " + strMode + " mode, converting from " + strExplainMode);
+                    Console.WriteLine("[INFO] ConvertXYZ " + strVersionNum + " operating in the " + strMode + " mode, converting from " + strExplainMode);
 
                     // Error state; if one line fails, stop processing this file and move to the next
                     bool IsFileError = false;
 
                     // Set up the input file
-                    Console.WriteLine("Processing file: " + strInputFilePath);
+                    Console.WriteLine("[INFO] Processing file: " + strInputFilePath);
                     var txtXYZ = new List<string>(File.ReadAllLines(strInputFilePath));
 
                     // Set up the output file
@@ -118,7 +124,7 @@ namespace ConvertXYZ
                             // Remove occupancy and thermal vibration and add this line to the output
                             var newline = string.Join("   ", atom[0], atom[1], atom[2], atom[3]);
                             txtXYZNew.Add(newline);
-                            if (option.IsVerbose) Console.WriteLine(newline);
+                            if (option.IsVerbose) Console.WriteLine("[VERBOSE] " + newline);
                             intTotalAtoms++;
                         }
                         if (IsFileError) break;
@@ -126,7 +132,7 @@ namespace ConvertXYZ
                     }
                     else
                     {
-                        // Forward: standard XYZ to compputem XYZ.
+                        // Forward: standard XYZ to computem XYZ.
                         // Comment line
                         txtXYZNew.Add(string.Join(", ", txtXYZ[0], txtXYZ[1]));
                         // Cell size line (will fill in after determining the boundaries)
@@ -155,48 +161,69 @@ namespace ConvertXYZ
                             // Add occupancy (1) and thermal vibration coeff and add this line to the output
                             var newline = string.Join("   ", string.Join("   ", atom), '1', option.ThermalVibration.ToString());
                             txtXYZNew.Add(newline);
-                            if (option.IsVerbose) Console.WriteLine(newline);
+                            if (option.IsVerbose) Console.WriteLine("[VERBOSE] " + newline);
                             // insert x y z values to the lists
                             x.Add(Convert.ToSingle(atom[1]));
                             y.Add(Convert.ToSingle(atom[2]));
                             z.Add(Convert.ToSingle(atom[3]));
                         }
                         if (IsFileError) break;
-                        // Get the x y z boundaries as the cell size for the second line of the output
+                        // Get the x y z boundaries as the cell size
                         x.Sort();
                         y.Sort();
                         z.Sort();
                         var xmax = x[x.Count - 1];
                         var ymax = y[y.Count - 1];
                         var zmax = z[z.Count - 1];
-                        txtXYZNew[1] = string.Join("   ", "  ", xmax, ymax, zmax);
+                        // If the cell size has been defined in the input, write it to the second line.
+                        // Othersize, use the determined values. If the input is invalid, use the determined values.
+                        Console.Write("[INFO] The cell size for this file is determined to be: " + xmax + ", " + ymax + ", " + zmax + ". ");
+                        if (string.IsNullOrEmpty(option.CellSize))
+                        {
+                            txtXYZNew[1] = string.Join("   ", "  ", xmax, ymax, zmax);
+                            Console.WriteLine("It is written to the output file.");
+                        }
+                        else
+                        {
+                            string[] boundaries = option.CellSize.Split(",", StringSplitOptions.RemoveEmptyEntries);
+                            if (boundaries.Length == 3)
+                            {
+                                txtXYZNew[1] = string.Join("   ", "  ", boundaries[0], boundaries[1], boundaries[2]);
+                                Console.WriteLine("\n[INFO] However, user specified a unit cell size of " + boundaries[0] + ", " + boundaries[1] + ", " + boundaries[2] + ". The latter is written to the output file.");
+                            }
+                            else
+                            {
+                                Console.WriteLine("\n[WARNING] The user specified an invalid cell size in the input. The determined cell size is written to the output file instead.");
+                                txtXYZNew[1] = string.Join("   ", "  ", xmax, ymax, zmax);
+                            }
+                        }
                         // Add "-1" to the end of the file --computem file format
                         txtXYZNew.Add("-1");
                     }
-                    Console.WriteLine("Writing file to: " + strOutputFilePath);
+                    Console.WriteLine("[INFO] Writing file to: " + strOutputFilePath);
                     File.WriteAllLines(strOutputFilePath, txtXYZNew);
                 }
             }
             catch(Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine("[ERROR] " + e.Message);
                 IsGlobalError = true;
             }
-            Console.WriteLine("All tasks completed.");
+            Console.WriteLine("[INFO] All tasks completed.");
             if(IsGlobalError)
             {
-                Console.WriteLine("There were error(s) during the conversion.");
+                Console.WriteLine("[INFO] There were error(s) during the conversion.");
             }
             else
             {
-                Console.WriteLine("No error detected.");
+                Console.WriteLine("[INFO] No error detected.");
             }
         }
 
         private static void StopLine(string strLine)
         {
-            Console.WriteLine("File format is wrong. Cannot process this line: " + strLine);
-            Console.WriteLine("This file is skipped.");
+            Console.WriteLine("[ERROR] File format is wrong. Cannot process this line: " + strLine);
+            Console.WriteLine("[INFO] This file is skipped.");
         }
     }
 }
