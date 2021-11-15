@@ -43,7 +43,7 @@ Converting a "standard" XYZ file to the computem format with the default setting
 .\ConvertXYZ example.xyz
 ```
 
-Converting multiple computem XYZ file to the "standard" format with the default settings:
+Converting multiple computem XYZ files to the "standard" format with the default settings:
 ```
 .\ConvertXYZ file1.xyz file2.xyz file3.xyz -r
 ```
