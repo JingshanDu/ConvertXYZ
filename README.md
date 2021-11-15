@@ -36,6 +36,24 @@ Options:
 
   --version        Display version information.
 ```
+
+## Examples
+Converting a "standard" XYZ file to the computem format with the default settings:
+```
+.\ConvertXYZ example.xyz
+```
+
+Converting multiple computem XYZ file to the "standard" format with the default settings:
+```
+.\ConvertXYZ file1.xyz file2.xyz file3.xyz -r
+```
+
+Converting a "standard" XYZ file to the computem format and specify an RMS thermal vibration coefficient = 0.1 and unit cell size (size_x, size_y, size_z) = (3.5, 3.5, 3.5):
+```
+.\ConvertXYZ example.xyz -t 0.1 -c 3.5,3.5,3.5
+```
+
+
 ## Building
 Visual Studio 2019, .net Core 3.1
 
