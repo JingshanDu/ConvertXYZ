@@ -38,30 +38,29 @@ Options:
 ```
 
 ## Examples
-Converting a "standard" XYZ file to the computem format with the default settings:
+This converts a "standard" XYZ file to the computem format with the default settings:
 ```
 .\ConvertXYZ example.xyz
 ```
 
-Converting multiple computem XYZ files to the "standard" format with the default settings:
+This converts multiple computem XYZ files to the "standard" format with the default settings:
 ```
 .\ConvertXYZ file1.xyz file2.xyz file3.xyz -r
 ```
 
-Converting a "standard" XYZ file to the computem format and specify an RMS thermal vibration coefficient = 0.1 and unit cell size (size_x, size_y, size_z) = (3.5, 3.5, 3.5):
+This converts a "standard" XYZ file to the computem format and specify an RMS thermal vibration coefficient = 0.1 and unit cell size (size_x, size_y, size_z) = (3.5, 3.5, 3.5):
 ```
 .\ConvertXYZ example.xyz -t 0.1 -c 3.5,3.5,3.5
 ```
 
 
-## Building
+## How to build
 Visual Studio 2019, .net Core 3.1
 
 Dependencies: 
 
-CommandLine: https://github.com/commandlineparser/commandline
-
-Bluegrams.Periodica.Data: https://github.com/Bluegrams/periodic-table-data
+1. CommandLine: https://github.com/commandlineparser/commandline
+2. Bluegrams.Periodica.Data: https://github.com/Bluegrams/periodic-table-data
 
 ## Program Download
 Please visit https://github.com/JingshanDu/ConvertXYZ/releases
