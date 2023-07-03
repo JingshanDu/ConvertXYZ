@@ -45,6 +45,18 @@ namespace ConvertXYZ
                 Default = "",
                 HelpText = "Specify the unit cell size separated by commas: x,y,z. Only effective in forward conversion. Default behavior: Using the maximum xyz coordinates of the atoms.")]
             public string CellSize { get; set; }
+            
+            [Usage(ApplicationAlias = "ConvertXYZ")]
+            public static IEnumerable<Example> Examples
+            {
+                get
+                {
+                    return new List<Example>()
+                    {
+                        new Example("Convert standard XYZ (e.g., exported from Vesta) to computem XYZ", new Options {})
+                    }
+                }
+            }
         }
 
 
